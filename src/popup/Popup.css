@@ -1,56 +1,301 @@
 .popup {
   text-align: center;
-  width: 800px;
-  height: 400px;
+  width: 470px;
+  height: 350px;
 }
 
-.popup-greet {
-  color: #80FFAB;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 2em;
-  font-style: italic;
-  letter-spacing: 0.1em;
-  font-family: "Noto Sans", sans-serif;
-  margin-top: 2em;
-  padding: 0 0.8em 0.1em 0.8em;
+.popup h1 {
+  color: #3D8F96;
 }
 
-.brand {
-  font-family: 'Roboto Mono', monospace;
-  letter-spacing: 0em;
-  font-style: normal;
-  font-weight: 600;
+.uploader input {
+  display: none;
 }
 
-.stack-head {
-  color: #ffffff;
-  font-family: 'Roboto Mono', monospace;
-  /* font-weight: 700; */
-  font-size: 2em;
+@keyframes stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
-.tech-logos {
-  padding: 0 2em 2em 2em;
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.logo {
-  height: 40px;
-  padding-right: 1.8em;
+.upload-button {
+  border-radius: 5px;
+  margin: 240px auto 0;
+  border: none;
+  cursor: pointer;
+  width: 430px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 150ms, color 150ms ease-in-out;
+  white-space: nowrap;
+  color: #F7FAFD;
+  background-color: #65C3CB;
 }
 
-.contrib-msg {
-  color: #ffffff;
-  font-family: 'Roboto Mono', monospace;
-  /* font-weight: 700; */
-  font-size: 1.5em;
-  margin: 2em 2em 3em 2em;
+.is-uploading {
+  background-color: #3D8F96;
 }
 
-.contrib-msg a {
-  color: #0055ff;
+.is-uploaded {
+  background-color: #ffffff;
+  color: #3D8F96;
+}
+
+.upload-button ul {
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  transition: transform 300ms cubic-bezier(0, 0.65, 0.7, 0.9);
+  transform-style: preserve-3d;
+  transform-origin: 0 0;
+  transform: rotateX(0deg);
+}
+
+.is-uploading ul {
+  transform-origin: 0 30px;
+  transform: rotateX(90deg);
+}
+
+.is-uploaded ul {
+  transform-origin: 0 90px;
+  transform: rotateX(180deg);
+}
+
+.upload-button li {
+  backface-visibility: hidden;
+  display: block;
+  transition: opacity 150ms;
+  transform-origin: 50% 50%;
+  transform: rotateX(0deg) translateZ(10px);
+  width: 100%;
+}
+
+.upload-button li:nth-child(1) {
+  opacity: 1;
+  transform: rotateX(0deg) translateZ(10px);
+}
+
+.is-uploading li:nth-child(1),
+.is-uploaded li:nth-child(1) {
+  opacity: 0;
+  transform: rotateX(0deg) translateZ(10px);
+}
+
+.upload-button li:nth-child(2) {
+  opacity: 0;
+  transform: rotateX(-90deg) translateZ(10px);
+}
+
+.is-uploading li:nth-child(2) {
+  opacity: 1;
+  transform: rotateX(-90deg) translateZ(10px);
+}
+
+.upload-button li:nth-child(3) {
+  opacity: 0;
+  transform: rotateX(-180deg) translateZ(10px);
+}
+
+.is-uploaded li:nth-child(3) {
+  opacity: 1;
+  transform: rotateX(-180deg) translateZ(10px);
+}
+
+svg {
+  position: absolute;
+  transition: opacity 150ms;
+}
+
+svg:nth-child(1) {
+  fill: #F7FAFD;
+  opacity: 1;
+  height: 30px;
+  width: 33px;
+  left: 20px;
+  top: 15px;
+}
+
+.is-uploading svg:nth-child(1),
+.is-uploaded svg:nth-child(1) {
+  opacity: 0 !important;
+}
+
+svg:nth-child(2) {
+  fill: transparent;
+  left: 20px;
+  top: 15px;
+  width: 30px;
+  height: 30px;
+  stroke: #F7FAFD;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 80;
+  opacity: 0;
+}
+
+.is-uploading svg:nth-child(2) {
+  opacity: 1;
+  animation: stroke 2s linear infinite forwards,
+    rotate 1s linear infinite forwards;
+}
+
+.is-uploaded svg:nth-child(2) {
+  opacity: 1;
+  fill: #F7FAFD;
+  stroke-dasharray: 0;
+}
+
+svg:nth-child(3) {
+  fill: transparent;
+  left: 31px;
+  top: 27px;
+  width: 30px;
+  height: 30px;
+  stroke: transparent;
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  transform: translate3d(-5px, -3px, 0);
+  transition: stroke 300ms;
+  opacity: 0;
+}
+
+.is-uploaded svg:nth-child(3) {
+  opacity: 1;
+  animation: stroke 300ms ease-in-out forwards;
+  stroke: #3D8F96;
+}
+
+.cube {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 110px;
+  left: 183px;
+  transform-style: preserve-3d;
+  animation: rotate-cube 20s linear infinite;
+}
+
+/* .cube:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transform-origin: bottom;
+  transform-style: preserve-3d;
+  transform: rotateX(90deg) translateY(50px) translateZ(-50px);
+  background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.cube div {
+  background: url("/img/ipfs.jpg");
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.cube div:nth-child(1) {
+  transform: translateZ(-50px);
+}
+
+.cube div:nth-child(2) {
+  transform: translateZ(50px) rotateY(180deg);
+}
+
+.cube div:nth-child(3) {
+  transform-origin: right;
+  transform: translateZ(50px) rotateY(270deg);
+}
+
+.cube div:nth-child(4) {
+  transform-origin: left;
+  transform: translateZ(50px) rotateY(90deg);
+}
+
+.cube div:nth-child(5) {
+  transform-origin: bottom;
+  transform: translateZ(50px) rotateX(90deg);
+}
+
+.cube div:nth-child(6) {
+  transform-origin: top;
+  transform: translateZ(50px) rotateX(270deg);
+}
+
+@keyframes rotate-cube {
+  0% {
+    transform: rotateX(-25deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(-25deg) rotateY(360deg);
+  }
+}
+
+.results {
+  display: none;
+  margin: 20px;
+}
+
+.results input {
+  background-color: white;
+  border: 1px solid #4a9fa1;
+  padding: 0 10px;
+  border-radius: 5px;
+  height: 32px;
+  line-height: 32px;
+  box-sizing: border-box;
+}
+
+.results-uploaded {
+  display: block;
+}
+
+.spacer {
+  height: 10px;
+}
+
+.result-label {
   font-weight: bold;
 }
 
+.result-copy {
+  border: 1px solid #4a9fa1;
+  padding: 4px;
+  height: 32px;
+  width: 32px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.result {
+  height: 32px;
+  line-height: 32px;
+  display: grid;
+  grid-template-columns: 70px 310px 50px;
+  grid-gap: 10px;
+  margin-bottom: 10px;
+}
+
+.result  svg {
+  width: 16px;
+  height: 16px;
+  stroke: #000;
+  position: absolute;
+  top: 7px;
+  left: 8px;
+}

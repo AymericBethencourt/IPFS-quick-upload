@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "IPFS Quick Upload",
   "description": "Upload files to IPFS in 1 click and get a URL usable anywhere you want.",
   "browser_action": {

@@ -14,10 +14,6 @@ const copyPatterns = [
   },
   { from: 'src/img', to: 'img' },
   {
-    from: 'src/lib',
-    to: 'lib/',
-  },
-  {
     from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js',
     to: 'lib/js/',
   },
